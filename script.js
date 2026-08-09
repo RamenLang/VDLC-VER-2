@@ -2,13 +2,13 @@ const recentVideos = [
   {
     title: "Flixk",
     description: "",
-    duration: "00:46",
+    duration: "01:34",
     src: "Assets/hit-reel.mp4"
   },
   {
     title: "It's Over",
     description: "",
-    duration: "00:56",
+    duration: "01:48",
     src: "Assets/its-over.mp4"
   },
   {
