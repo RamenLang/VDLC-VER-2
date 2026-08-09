@@ -83,6 +83,7 @@ function createVideoCard(video) {
         <div class="video-overlay"></div>
         <button class="play-button" type="button" aria-label="Play video">▶</button>
         <span class="video-duration">${video.duration}</span>
+        <span class="fullscreen-hint">Double-tap for fullscreen</span>
       </div>
       <div class="video-info">
         <h3>${video.title}</h3>
@@ -117,39 +118,82 @@ document.querySelectorAll(".video-card").forEach((card) => {
     console.error(`Failed to load video: ${video.src}`);
   });
 
-  video.addEventListener("dblclick", () => {
-  if (!document.fullscreenElement) {
-    video.requestFullscreen();
-  } else {
-    document.exitFullscreen();
+  function togglePlay() {
+    if (video.paused) {
+      document.querySelectorAll(".video-card video").forEach((otherVideo) => {
+        if (otherVideo !== video && !otherVideo.paused) {
+          otherVideo.pause();
+          otherVideo.muted = true;
+          const otherButton = otherVideo.closest(".video-card").querySelector(".play-button");
+          if (otherButton) otherButton.textContent = "▶";
+        }
+      });
+
+      video.muted = false;
+      video.play();
+      button.textContent = "❚❚";
+    } else {
+      video.pause();
+      button.textContent = "▶";
+    }
   }
+
+  button.addEventListener("click", togglePlay);
+
+  let clickTimer = null;
+  video.addEventListener("click", () => {
+    if (clickTimer) {
+      clearTimeout(clickTimer);
+      clickTimer = null;
+      return;
+    }
+    clickTimer = setTimeout(() => {
+      clickTimer = null;
+      togglePlay();
+    }, 250);
   });
 
-  button.addEventListener("click", () => {
-  if (video.paused) {
-    // pause every other video before playing this one
-    document.querySelectorAll(".video-card video").forEach((otherVideo) => {
-      if (otherVideo !== video && !otherVideo.paused) {
-        otherVideo.pause();
-        otherVideo.muted = true;
-        const otherButton = otherVideo.closest(".video-card").querySelector(".play-button");
-        if (otherButton) otherButton.textContent = "▶";
-      }
-    });
-
+  let savedScrollY = 0;
+  video.addEventListener("dblclick", () => {
     video.muted = false;
-    video.play();
-    button.textContent = "❚❚";
-  } else {
-    video.pause();
-    button.textContent = "▶";
-  }
-});
+    if (!document.fullscreenElement) {
+      savedScrollY = window.scrollY;
+      video.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  });
+
+  document.addEventListener("fullscreenchange", () => {
+    if (!document.fullscreenElement) {
+      window.scrollTo(0, savedScrollY);
+    }
+  });
 
   video.addEventListener("ended", () => {
     video.currentTime = 0;
     button.textContent = "▶";
   });
+
+  video.addEventListener("play", () => {
+    card.classList.add("is-playing");
+  });
+
+  video.addEventListener("pause", () => {
+    card.classList.remove("is-playing");
+  });
+
+  const offscreenObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting && !video.paused) {
+          video.pause();
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+  offscreenObserver.observe(video);
 });
 
 const contactForm = document.getElementById("contactForm");
@@ -209,3 +253,19 @@ if (inquireForm) {
     }
   });
 }
+
+const revealTargets = document.querySelectorAll(".video-card, .section-heading, .split-heading");
+
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-revealed");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.15 }
+);
+
+revealTargets.forEach((el) => revealObserver.observe(el));
