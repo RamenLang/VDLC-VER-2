@@ -964,3 +964,13 @@ textarea {
     transition: none;
   }
 }
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  overflow: hidden;
+  object-fit: cover;
+}
