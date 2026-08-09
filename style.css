@@ -938,16 +938,21 @@ textarea {
 .video-card,
 .section-heading,
 .split-heading {
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.video-card.pre-reveal,
+.section-heading.pre-reveal,
+.split-heading.pre-reveal {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .video-card.is-revealed,
 .section-heading.is-revealed,
 .split-heading.is-revealed {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

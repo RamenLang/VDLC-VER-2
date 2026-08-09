@@ -105,6 +105,16 @@ if (allGrid) {
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+let savedScrollY = 0;
+
+document.addEventListener("fullscreenchange", () => {
+  if (document.fullscreenElement) {
+    savedScrollY = window.scrollY;
+  } else {
+    window.scrollTo(0, savedScrollY);
+  }
+});
+
 document.querySelectorAll(".video-card").forEach((card) => {
   const video = card.querySelector("video");
   const button = card.querySelector(".play-button");
@@ -153,7 +163,6 @@ document.querySelectorAll(".video-card").forEach((card) => {
     }, 250);
   });
 
-  let savedScrollY = 0;
   video.addEventListener("dblclick", () => {
     video.muted = false;
     if (!document.fullscreenElement) {
@@ -164,10 +173,11 @@ document.querySelectorAll(".video-card").forEach((card) => {
     }
   });
 
-  document.addEventListener("fullscreenchange", () => {
-    if (!document.fullscreenElement) {
-      window.scrollTo(0, savedScrollY);
-    }
+  video.addEventListener("webkitbeginfullscreen", () => {
+    savedScrollY = window.scrollY;
+  });
+  video.addEventListener("webkitendfullscreen", () => {
+    window.scrollTo(0, savedScrollY);
   });
 
   video.addEventListener("ended", () => {
@@ -256,16 +266,21 @@ if (inquireForm) {
 
 const revealTargets = document.querySelectorAll(".video-card, .section-heading, .split-heading");
 
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-revealed");
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.15 }
-);
+if ("IntersectionObserver" in window) {
+  revealTargets.forEach((el) => el.classList.add("pre-reveal"));
 
-revealTargets.forEach((el) => revealObserver.observe(el));
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove("pre-reveal");
+          entry.target.classList.add("is-revealed");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  revealTargets.forEach((el) => revealObserver.observe(el));
+}
