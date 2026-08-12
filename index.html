@@ -12,38 +12,36 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="page-shell">
-          <header class="topbar">
-      <a href="#home" class="brand" aria-label="Home">
-        <img src="Assets/ramen.png" class="brand-mark" alt="Ramen logo" />
-        <span class="brand-text">Vincent De La Cruz</span>
-      </a>
+      <header class="topbar">
+        <a href="#home" class="brand" aria-label="Home">
+          <img src="Assets/ramen.png" class="brand-mark" alt="Ramen logo" />
+          <span class="brand-text">Vincent De La Cruz</span>
+        </a>
 
-      <nav class="nav" aria-label="Main navigation">
-        <a href="#recent">Recent</a>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#about">About</a>
-        <a href="https://instagram.com/binoew_" target="_blank" rel="noreferrer">Instagram</a>
-        <a href="https://discord.com/users/rhamennudles" target="_blank" rel="noreferrer">Discord</a>
-      </nav>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="#recent">Recent</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#about">About</a>
+          <a href="https://instagram.com/binoew_" target="_blank" rel="noreferrer">Instagram</a>
+          <a href="https://discord.com/users/rhamennudles" target="_blank" rel="noreferrer">Discord</a>
+        </nav>
 
-      <button class="button button-primary" id="inquireOpenBtn" type="button">Inquire</button>
-    </header>
+        <button class="button button-primary" id="inquireOpenBtn" type="button">Inquire</button>
+      </header>
 
       <main>
         <section class="hero" id="home">
           <div class="hero-copy">
             <p class="eyebrow">Video creator • storyteller • editor</p>
             <h1>Vincent De La Cruz</h1>
-            <p class="lead">
-              Tell your stories through Ramen
-            </p>
+            <p class="lead">Tell your stories through Ramen</p>
 
             <div class="hero-actions">
               <a href="#portfolio" class="button button-primary">View work</a>
@@ -67,17 +65,21 @@
           </div>
 
           <div class="hero-visual" aria-label="Featured logo">
-          <div class="featured-card">
             <div class="featured-card">
-            <div class="steam" aria-hidden="true">
-              <span class="wisp wisp-1"></span>
-              <span class="wisp wisp-2"></span>
-              <span class="wisp wisp-3"></span>
-            </div>
-            <div class="featured-photo-wrap">
-              <img src="Assets/ramen.png" class="featured-photo featured-photo-a" alt="Ramen artwork" />
-              <img src="Assets/ramen2.png" class="featured-photo featured-photo-b" alt="Ramen artwork alternate" />
-            </div>
+              <div class="bowl-frame">
+                <div class="steam" aria-hidden="true">
+                  <span class="wisp wisp-1"></span>
+                  <span class="wisp wisp-2"></span>
+                  <span class="wisp wisp-3"></span>
+                </div>
+                <div class="featured-photo-wrap">
+                  <img src="Assets/ramen.png" class="featured-photo featured-photo-a" alt="Ramen artwork" />
+                  <img src="Assets/ramen2.png" class="featured-photo featured-photo-b" alt="Ramen artwork alternate" />
+                </div>
+                <span class="chili-fleck fleck-1" aria-hidden="true"></span>
+                <span class="chili-fleck fleck-2" aria-hidden="true"></span>
+                <span class="chili-fleck fleck-3" aria-hidden="true"></span>
+              </div>
 
               <div class="featured-info">
                 <span class="tag">Alias</span>
@@ -88,71 +90,109 @@
           </div>
         </section>
 
+        <div class="noodle-divider" aria-hidden="true">
+          <svg viewBox="0 0 1200 40" preserveAspectRatio="none">
+            <path class="noodle-strand noodle-strand-c" d="M0,18 C150,42 150,-4 300,18 C450,42 450,-4 600,18 C750,42 750,-4 900,18 C1050,42 1050,-4 1200,18" />
+            <path class="noodle-strand noodle-strand-b" d="M0,22 C150,2 150,42 300,22 C450,2 450,42 600,22 C750,2 750,42 900,22 C1050,2 1050,42 1200,22" />
+            <path class="noodle-strand noodle-strand-a" d="M0,20 C150,40 150,0 300,20 C450,40 450,0 600,20 C750,40 750,0 900,20 C1050,40 1050,0 1200,20" />
+            <circle class="noodle-garnish" cx="150" cy="20" r="3.5" />
+            <circle class="noodle-garnish-alt" cx="450" cy="20" r="3" />
+            <circle class="noodle-garnish" cx="750" cy="20" r="3.5" />
+            <circle class="noodle-garnish-alt" cx="1050" cy="20" r="3" />
+          </svg>
+        </div>
+
         <section class="content-section" id="recent">
           <div class="section-heading">
-            <p class="eyebrow">Fresh work</p>
+            <p class="eyebrow">Fresh off the stove</p>
             <h2>Videos I made recently</h2>
           </div>
           <div class="video-grid recent-grid" id="recentVideosGrid"></div>
         </section>
 
+        <div class="noodle-divider" aria-hidden="true">
+          <svg viewBox="0 0 1200 40" preserveAspectRatio="none">
+            <path class="noodle-strand noodle-strand-c" d="M0,22 C150,-2 150,46 300,22 C450,-2 450,46 600,22 C750,-2 750,46 900,22 C1050,-2 1050,46 1200,22" />
+            <path class="noodle-strand noodle-strand-b" d="M0,18 C150,38 150,-2 300,18 C450,38 450,-2 600,18 C750,38 750,-2 900,18 C1050,38 1050,-2 1200,18" />
+            <path class="noodle-strand noodle-strand-a" d="M0,20 C150,0 150,40 300,20 C450,0 450,40 600,20 C750,0 750,40 900,20 C1050,0 1050,40 1200,20" />
+            <circle class="noodle-garnish-alt" cx="300" cy="20" r="3" />
+            <circle class="noodle-garnish" cx="600" cy="20" r="3.5" />
+            <circle class="noodle-garnish-alt" cx="900" cy="20" r="3" />
+          </svg>
+        </div>
+
         <section class="content-section portfolio-section" id="portfolio">
           <div class="section-heading">
-              <p class="eyebrow">Portfolio</p>
-              <h2>Videos I have made</h2>
+            <p class="eyebrow">Full menu</p>
+            <h2>Videos I have made</h2>
           </div>
           <div class="video-grid portfolio-grid" id="allVideosGrid"></div>
         </section>
 
+        <div class="noodle-divider" aria-hidden="true">
+          <svg viewBox="0 0 1200 40" preserveAspectRatio="none">
+            <path class="noodle-strand noodle-strand-c" d="M0,18 C150,42 150,-4 300,18 C450,42 450,-4 600,18 C750,42 750,-4 900,18 C1050,42 1050,-4 1200,18" />
+            <path class="noodle-strand noodle-strand-b" d="M0,22 C150,2 150,42 300,22 C450,2 450,42 600,22 C750,2 750,42 900,22 C1050,2 1050,42 1200,22" />
+            <path class="noodle-strand noodle-strand-a" d="M0,20 C150,40 150,0 300,20 C450,40 450,0 600,20 C750,40 750,0 900,20 C1050,40 1050,0 1200,20" />
+            <circle class="noodle-garnish" cx="150" cy="20" r="3.5" />
+            <circle class="noodle-garnish-alt" cx="450" cy="20" r="3" />
+            <circle class="noodle-garnish" cx="750" cy="20" r="3.5" />
+            <circle class="noodle-garnish-alt" cx="1050" cy="20" r="3" />
+          </svg>
+        </div>
+
         <section class="content-section about-section" id="about">
           <div class="about-card">
             <div class="about-copy">
-            <p class="eyebrow">About me</p>
-            <h2>Visuals that are off the hook.</h2>
-            <p>
-              I'm Vincent De La Cruz, a creative video editor focused on
-              producing work that feels immersive, stylish, and memorable. I turn ideas into
-              polished edits with energy, emotion, and a strong sense of identity.
-            </p>
-            <p>
-              From cinematic sequences to punchy social content, I build visuals that feel
-              intentional from the first frame to the final cut, whether the goal is mood,
-              impact, or storytelling.
-            </p>
+              <p class="eyebrow">About me</p>
+              <h2>Visuals that are off the hook.</h2>
+              <p>
+                I'm Vincent De La Cruz, a creative video editor focused on
+                producing work that feels immersive, stylish, and memorable. I turn ideas into
+                polished edits with energy, emotion, and a strong sense of identity.
+              </p>
+              <p>
+                From cinematic sequences to punchy social content, I build visuals that feel
+                intentional from the first frame to the final cut, whether the goal is mood,
+                impact, or storytelling.
+              </p>
 
-            <div class="achievements">
-              <p class="eyebrow">Achievements</p>
-              <ul class="achievements-list">
-                <li>
-                  <strong>SINAG Festival</strong>
-                  <span>Best Editor · Best Cinematography · Best Production Crew</span>
-                </li>
-                <li>
-                  <strong>SITE Festival</strong>
-                  <span>People's Choice Award · Best Short Film</span>
-                </li>
-              </ul>
+              <div class="achievements">
+                <p class="eyebrow">Achievements</p>
+                <ul class="achievements-list">
+                  <li>
+                    <strong>SINAG Festival</strong>
+                    <span>Best Editor · Best Cinematography · Best Production Crew</span>
+                  </li>
+                  <li>
+                    <strong>SITE Festival</strong>
+                    <span>People's Choice Award · Best Short Film</span>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
 
             <div class="about-panel">
-            <div class="mini-stat">
-              <span>Specialty</span>
-              <strong>Visual storytelling</strong>
-            </div>
-            <div class="mini-stat">
-              <span>Style</span>
-              <strong>Anything Particular</strong>
-            </div>
-            <div class="mini-stat">
-              <span>Approach</span>
-              <strong>W Mindset</strong>
-            </div>
-            <div class="mini-stat">
-              <span>Editing Software</span>
-              <strong>Premiere Pro · After Effects</strong>
+              <div class="mini-stat">
+                <span>Specialty</span>
+                <strong>Visual storytelling</strong>
+              </div>
+              <div class="mini-stat">
+                <span>Style</span>
+                <strong>Anything Particular</strong>
+              </div>
+              <div class="mini-stat">
+                <span>Approach</span>
+                <strong>W Mindset</strong>
+              </div>
+              <div class="mini-stat">
+                <span>Editing Software</span>
+                <strong>Premiere Pro · After Effects</strong>
+              </div>
             </div>
           </div>
+        </section>
+      </main>
 
       <footer class="contact-section" id="contact">
         <div class="footer-meta">
@@ -166,29 +206,29 @@
     </div>
 
     <div class="inquire-modal" id="inquireModal" aria-hidden="true">
-  <div class="inquire-backdrop" id="inquireBackdrop"></div>
-  <div class="inquire-dialog" role="dialog" aria-modal="true" aria-label="Inquire form">
-    <button class="inquire-close" id="inquireCloseBtn" type="button" aria-label="Close">✕</button>
-    <h2>Let's talk</h2>
-    <p>Send me a message and I'll get back to you.</p>
-    <form id="inquireForm" action="https://formspree.io/f/mbgrdawo" method="POST">
-      <label>
-        Name
-        <input type="text" name="name" required />
-      </label>
-      <label>
-        Email
-        <input type="email" name="email" required />
-      </label>
-      <label>
-        Message
-        <textarea name="message" rows="4" required></textarea>
-      </label>
-      <button type="submit" class="button button-primary">Send message</button>
-    </form>
-    <p class="inquire-status" id="inquireStatus"></p>
-  </div>
-</div>
+      <div class="inquire-backdrop" id="inquireBackdrop"></div>
+      <div class="inquire-dialog" role="dialog" aria-modal="true" aria-label="Inquire form">
+        <button class="inquire-close" id="inquireCloseBtn" type="button" aria-label="Close">✕</button>
+        <h2>Let's talk</h2>
+        <p>Send me a message and I'll get back to you.</p>
+        <form id="inquireForm" action="https://formspree.io/f/mbgrdawo" method="POST">
+          <label>
+            Name
+            <input type="text" name="name" required />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" required />
+          </label>
+          <label>
+            Message
+            <textarea name="message" rows="4" required></textarea>
+          </label>
+          <button type="submit" class="button button-primary">Send message</button>
+        </form>
+        <p class="inquire-status" id="inquireStatus"></p>
+      </div>
+    </div>
 
     <script src="script.js"></script>
   </body>
