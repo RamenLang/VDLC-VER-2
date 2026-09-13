@@ -18,18 +18,28 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="wheat-parallax" aria-hidden="true">
+      <div class="wheat-layer wheat-layer-back" id="wheatBack">
+        <div class="wheat-layer-inner"></div>
+      </div>
+      <div class="wheat-layer wheat-layer-front" id="wheatFront">
+        <div class="wheat-layer-inner"></div>
+      </div>
+    </div>
+
     <div class="page-shell">
       <header class="topbar">
-        <a href="#home" class="brand" aria-label="Home">
+        <a href="index.html#home" class="brand" aria-label="Home">
           <img src="Assets/ramen.png" class="brand-mark" alt="Ramen logo" />
           <span class="brand-text">Vincent De La Cruz</span>
         </a>
 
         <nav class="nav" aria-label="Main navigation">
-          <a href="#recent">Recent</a>
-          <a href="#portfolio">Portfolio</a>
-          <a href="#game">Game</a>
-          <a href="#about">About</a>
+          <a href="index.html#recent">Recent</a>
+          <a href="own-works.html">My Own Works</a>
+          <a href="paid-works.html">Paid Works</a>
+          <a href="index.html#game">Game</a>
+          <a href="index.html#about">About</a>
           <a href="https://instagram.com/binoew_" target="_blank" rel="noreferrer">Instagram</a>
           <a href="https://discord.com/users/rhamennudles" target="_blank" rel="noreferrer">Discord</a>
         </nav>
@@ -45,8 +55,8 @@
             <p class="lead">Tell your stories through Ramen</p>
 
             <div class="hero-actions">
-              <a href="#portfolio" class="button button-primary">View work</a>
-              <a href="#about" class="button button-secondary">About me</a>
+              <a href="own-works.html" class="button button-primary">View work</a>
+              <a href="index.html#about" class="button button-secondary">About me</a>
             </div>
 
             <ul class="hero-stats" aria-label="Statistics">
@@ -75,7 +85,7 @@
                 </div>
                 <div class="featured-photo-wrap">
                   <img src="Assets/ramen.png" class="featured-photo featured-photo-a" alt="Ramen artwork" />
-                  <img src="Assets/ramen2.png" class="featured-photo featured-photo-b" alt="Ramen artwork alternate" />
+                  <img src="Assets/ramen5.png" class="featured-photo featured-photo-b" alt="Ramen artwork alternate" />
                 </div>
                 <span class="chili-fleck fleck-1" aria-hidden="true"></span>
                 <span class="chili-fleck fleck-2" aria-hidden="true"></span>
@@ -108,7 +118,7 @@
             <p class="eyebrow">Fresh off the stove</p>
             <h2>Videos I made recently</h2>
           </div>
-          <div class="video-grid recent-grid" id="recentVideosGrid"></div>
+          <div class="video-grid recent-grid" data-gallery="recent"></div>
         </section>
 
         <div class="noodle-divider" aria-hidden="true">
@@ -122,12 +132,33 @@
           </svg>
         </div>
 
-        <section class="content-section portfolio-section" id="portfolio">
+        <section class="content-section portfolio-section" id="work">
           <div class="section-heading">
             <p class="eyebrow">Full menu</p>
-            <h2>Videos I have made</h2>
+            <h2>Explore the work</h2>
           </div>
-          <div class="video-grid portfolio-grid" id="allVideosGrid"></div>
+
+          <div class="hub-grid">
+            <article class="hub-card">
+              <span class="tag">Personal</span>
+              <h3>My Own Works</h3>
+              <p>
+                Passion projects made on my own time — motion graphics, short films,
+                landscape footage, and reels, sorted by type.
+              </p>
+              <a href="own-works.html" class="button button-secondary">Explore</a>
+            </article>
+
+            <article class="hub-card">
+              <span class="tag">Client</span>
+              <h3>Paid Works</h3>
+              <p>
+                Edits made for clients and collaborators — motion graphics, film
+                edits, landscape footage, and reels, sorted by type.
+              </p>
+              <a href="paid-works.html" class="button button-secondary">Explore</a>
+            </article>
+          </div>
         </section>
 
         <div class="noodle-divider" aria-hidden="true">

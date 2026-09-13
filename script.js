@@ -1,79 +1,49 @@
-const recentVideos = [
-  {
-    title: "Flixk",
-    description: "",
-    duration: "01:34",
-    src: "Assets/hit-reel.mp4"
-  },
-  {
-    title: "It's Over",
-    description: "",
-    duration: "01:48",
-    src: "Assets/its-over.mp4"
-  },
-  {
-    title: "Lifetime",
-    description: "",
-    duration: "00:21",
-    src: "Assets/lifetime.mp4"
-  }
-];
-const allVideos = [
-  {
-    title: "ZT6",
-    description: "",
-    duration: "00:30",
-    src: "Assets/zt6.mp4"
-  },
-  {
-    title: "ValoCowboy",
-    description: "",
-    duration: "00:21",
-    src: "Assets/valorant.mp4"
-  },
-  {
-    title: "Hear Me Out",
-    description: "",
-    duration: "0:30",
-    src: "Assets/hear-me-out.mp4"
-  },
-  {
-    title: "SITE in borderland",
-    description: "",
-    duration: "00:51",
-    src: "Assets/csits-trailers.mp4"
-  },
-  {
-    title: "Surfin' USA",
-    description: "",
-    duration: "00:25",
-    src: "Assets/sample-edit1.mp4"
-  },
-  {
-    title: "Parallel Souls",
-    description: "",
-    duration: "03:00",
-    src: "Assets/parallel-souls.mp4"
-  },
-  {
-    title: "Stickman",
-    description: "",
-    duration: "01:27",
-    src: "Assets/stickman.mp4"
-  },
-  {
-    title: "Me, Myself, and I",
-    description: "",
-    duration: "00:32",
-    src: "Assets/uts.mp4"
-  },
-    {
-    title: "Pom Dance",
-    description: "",
-    duration: "00:34",
-    src: "Assets/pom-dance.mp4"
-  },
-];
+const galleries = {
+  recent: [
+    { title: "GetRekt", description: "", duration: "00:15", src: "Assets/get-rekt.mp4" },
+    { title: "The Descent", description: "", duration: "00:13", src: "Assets/descent.mp4" },
+    { title: "Leaves", description: "", duration: "00:37", src: "Assets/leaves.mp4" }
+  ],
+
+  "own-motion": [
+    { title: "Leaves", description: "Motion Graphics for Ben&Ben", duration: "0:37", src: "Assets/leaves.mp4" },
+    { title: "Lifetime", description: "Motion Graphics for Ben&Ben", duration: "0:21", src: "Assets/lifetime.mp4" }
+  ],
+  "own-film": [
+    { title: "Hear Me Out", description: "PRIMA Productions", duration: "00:30", src: "Assets/hear-me-out.mp4" },
+    { title: "Harana", description: "PRIMA Productions", duration: "00:09", src: "Assets/harana-teaser.mp4" },
+    { title: "Prima Logo", description: "PRIMA Productions", duration: "00:06", src: "Assets/prima-logo.mp4" }
+  ],
+  "own-landscape": [
+    { title: "SITE in Borderland", description: "Teaser for SITE", duration: "00:51", src: "Assets/csits-trailers.mp4" },
+    { title: "The Descent", description: "", duration: "00:13", src: "Assets/descent.mp4" },
+    { title: "RamenStyle", description: "", duration: "00:21", src: "Assets/valorant.mp4" },
+    { title: "It's me Ramen", description: "", duration: "00:32", src: "Assets/uts.mp4" },
+    { title: "PomSITE", description: "", duration: "00:34", src: "Assets/pom-dance.mp4" },
+    { title: "Parallel Souls", description: "SITE Short Film", duration: "03:00", src: "Assets/parallel-souls.mp4" }
+  ],
+  "own-reels": [
+    { title: "Surfin' USA", description: "", duration: "00:25", src: "Assets/sample-edit1.mp4" },
+    { title: "Harana", description: "PRIMA Productions", duration: "00:09", src: "Assets/harana-teaser.mp4" }
+  ],
+
+  "paid-motion": [
+    { title: "GetRekt", description: "SaaS Demo", duration: "00:15", src: "Assets/get-rekt.mp4" }
+  ],
+  "paid-film": [
+  ],
+  "paid-landscape": [
+    { title: "ZT6", description: "Finished Video", duration: "00:30", src: "Assets/zt6.mp4" },
+    { title: "Stickman", description: "Paid Sample", duration: "01:27", src: "Assets/stickman.mp4" },
+    { title: "Zeep", description: "Paid Sample", duration: "00:43", src: "Assets/zeep.mp4" }
+  ],
+  "paid-reels": [
+    { title: "Hit", description: "BabyKhase9 Finished Video", duration: "01:34", src: "Assets/hit-reel.mp4" },
+    { title: "It's Over", description: "BabyKhase9 Finished Video", duration: "01:48", src: "Assets/its-over.mp4" },
+    { title: "Looks maxxing", description: "Paid Sample", duration: "00:10", src: "Assets/sample-edit2.mp4" },
+    { title: "Game Promotion", description: "Paid Sample", duration: "00:41", src: "Assets/sample-edit3.mp4" }
+  ]
+};
 
 function createVideoCard(video) {
   return `
@@ -93,25 +63,111 @@ function createVideoCard(video) {
   `;
 }
 
-const recentGrid = document.getElementById("recentVideosGrid");
-const allGrid = document.getElementById("allVideosGrid");
-if (recentGrid) {
-  recentGrid.innerHTML = recentVideos.map(createVideoCard).join("");
+function emptyGalleryMessage() {
+  return `<p class="gallery-empty">No videos in this category yet — check back soon.</p>`;
 }
-if (allGrid) {
-  allGrid.innerHTML = allVideos.map(createVideoCard).join("");
-}
+
+document.querySelectorAll("[data-gallery]").forEach((grid) => {
+  const key = grid.dataset.gallery;
+  const videos = galleries[key] || [];
+  grid.innerHTML = videos.length
+    ? videos.map(createVideoCard).join("")
+    : emptyGalleryMessage();
+});
+
+(function () {
+  const wraps = document.querySelectorAll(".carousel-wrap");
+  if (!wraps.length) return;
+
+  wraps.forEach((wrap) => {
+    const track = wrap.querySelector(".carousel-track");
+    const prevBtn = wrap.querySelector(".carousel-arrow-prev");
+    const nextBtn = wrap.querySelector(".carousel-arrow-next");
+    if (!track || !prevBtn || !nextBtn) return;
+
+    function stepSize() {
+      const firstCard = track.querySelector(".video-card");
+      if (!firstCard) return track.clientWidth;
+      const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 22);
+      return firstCard.getBoundingClientRect().width + gap;
+    }
+
+    function updateArrowState() {
+      const maxScroll = track.scrollWidth - track.clientWidth - 2;
+      prevBtn.disabled = track.scrollLeft <= 2;
+      nextBtn.disabled = track.scrollLeft >= maxScroll;
+    }
+
+    prevBtn.addEventListener("click", () => {
+      track.scrollBy({ left: -stepSize(), behavior: "smooth" });
+    });
+
+    nextBtn.addEventListener("click", () => {
+      track.scrollBy({ left: stepSize(), behavior: "smooth" });
+    });
+
+    track.addEventListener("scroll", updateArrowState, { passive: true });
+    window.addEventListener("resize", updateArrowState);
+
+    requestAnimationFrame(updateArrowState);
+  });
+})();
+
+(function () {
+  const layers = [
+    { el: document.getElementById("wheatBack"), speed: 0.015 },
+    { el: document.getElementById("wheatFront"), speed: 0.03 }
+  ].filter((l) => l.el);
+
+  if (!layers.length) return;
+
+  const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduceMotion) return;
+
+  let ticking = false;
+
+  function applyParallax() {
+    const y = window.scrollY;
+    layers.forEach((layer) => {
+      layer.el.style.transform = `translateY(${-(y * layer.speed)}px)`;
+    });
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(applyParallax);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  applyParallax();
+})();
 
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 let savedScrollY = 0;
+let activeFullscreenFrame = null;
 
-document.addEventListener("fullscreenchange", () => {
-  if (document.fullscreenElement) {
-    savedScrollY = window.scrollY;
-  } else {
-    window.scrollTo(0, savedScrollY);
+function openFullscreenFrame(frame) {
+  savedScrollY = window.scrollY;
+  frame.classList.add("is-fullscreen");
+  document.body.classList.add("fullscreen-lock");
+  activeFullscreenFrame = frame;
+}
+
+function closeFullscreenFrame(frame) {
+  frame.classList.remove("is-fullscreen");
+  document.body.classList.remove("fullscreen-lock");
+  activeFullscreenFrame = null;
+  window.scrollTo(0, savedScrollY);
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && activeFullscreenFrame) {
+    closeFullscreenFrame(activeFullscreenFrame);
   }
 });
 
@@ -165,19 +221,12 @@ document.querySelectorAll(".video-card").forEach((card) => {
 
   video.addEventListener("dblclick", () => {
     video.muted = false;
-    if (!document.fullscreenElement) {
-      savedScrollY = window.scrollY;
-      video.requestFullscreen();
+    const frame = card.querySelector(".video-frame");
+    if (!frame.classList.contains("is-fullscreen")) {
+      openFullscreenFrame(frame);
     } else {
-      document.exitFullscreen();
+      closeFullscreenFrame(frame);
     }
-  });
-
-  video.addEventListener("webkitbeginfullscreen", () => {
-    savedScrollY = window.scrollY;
-  });
-  video.addEventListener("webkitendfullscreen", () => {
-    window.scrollTo(0, savedScrollY);
   });
 
   video.addEventListener("ended", () => {
@@ -264,7 +313,7 @@ if (inquireForm) {
   });
 }
 
-const revealTargets = document.querySelectorAll(".video-card, .section-heading, .split-heading");
+const revealTargets = document.querySelectorAll(".video-card, .section-heading, .split-heading, .hub-card");
 
 if ("IntersectionObserver" in window) {
   revealTargets.forEach((el) => el.classList.add("pre-reveal"));
@@ -285,9 +334,6 @@ if ("IntersectionObserver" in window) {
   revealTargets.forEach((el) => revealObserver.observe(el));
 }
 
-/* ============================================================
-   Find the Coin — three-bowl shell game
-   ============================================================ */
 (function () {
   const board = document.getElementById("gameBoard");
   const track = document.getElementById("cupTrack");
@@ -301,7 +347,6 @@ if ("IntersectionObserver" in window) {
   const bowls = Array.from(track.querySelectorAll(".bowl"));
   const SLOT_LEFT = ["18%", "50%", "82%"];
 
-  // slotOfBowl[i] = which slot (0,1,2) bowl element i currently sits in
   let slotOfBowl = [0, 1, 2];
   let coinBowl = null;
   let roundActive = false;
@@ -315,7 +360,6 @@ if ("IntersectionObserver" in window) {
       if (instant) bowl.style.transition = "none";
       bowl.style.left = SLOT_LEFT[slotOfBowl[i]];
       if (instant) {
-        // force reflow, then restore the CSS-defined transition
         void bowl.offsetWidth;
         bowl.style.transition = "";
       }

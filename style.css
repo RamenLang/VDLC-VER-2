@@ -1,5 +1,4 @@
 :root {
-  /* Broth & bowl palette */
   --bg: #1a0f08;
   --bg-deep: #100905;
   --panel: rgba(43, 26, 14, 0.85);
@@ -22,6 +21,58 @@
   --accent-strong: var(--egg-strong);
 
   --shadow: 0 30px 60px rgba(10, 5, 2, 0.55);
+}
+
+.wheat-parallax {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.wheat-layer {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: clamp(260px, 38vw, 560px);
+  height: clamp(260px, 38vw, 560px);
+  will-change: transform;
+}
+
+.wheat-layer-inner {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: top left;
+  transform-origin: 6% 6%;
+}
+
+.wheat-layer-back .wheat-layer-inner {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 460 460'%3E%3Cdefs%3E%3Cg id='ear'%3E%3Cpath d='M0,300 C4,240 -8,180 2,120 C10,76 -2,40 4,0' stroke='%23f5b942' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3Cg fill='%23f5b942'%3E%3Cellipse cx='4' cy='0' rx='5' ry='11'/%3E%3Cellipse cx='-6' cy='18' rx='5' ry='11' transform='rotate(24 -6 18)'/%3E%3Cellipse cx='14' cy='18' rx='5' ry='11' transform='rotate(-24 14 18)'/%3E%3Cellipse cx='-4' cy='38' rx='5' ry='11' transform='rotate(18 -4 38)'/%3E%3Cellipse cx='12' cy='38' rx='5' ry='11' transform='rotate(-18 12 38)'/%3E%3Cellipse cx='-2' cy='58' rx='5' ry='11' transform='rotate(14 -2 58)'/%3E%3Cellipse cx='10' cy='58' rx='5' ry='11' transform='rotate(-14 10 58)'/%3E%3C/g%3E%3C/g%3E%3C/defs%3E%3Cuse href='%23ear' transform='translate(26,26) rotate(80)'/%3E%3Cuse href='%23ear' transform='translate(26,26) rotate(98) scale(0.9)'/%3E%3Cuse href='%23ear' transform='translate(26,26) rotate(116) scale(1.05)'/%3E%3Cuse href='%23ear' transform='translate(26,26) rotate(134) scale(0.85)'/%3E%3Cuse href='%23ear' transform='translate(26,26) rotate(152) scale(0.95)'/%3E%3Cuse href='%23ear' transform='translate(26,26) rotate(170) scale(0.75)'/%3E%3C/svg%3E");
+  opacity: 0.06;
+  filter: blur(1.5px);
+  animation: wheatSwaySlow 26s ease-in-out infinite;
+}
+
+.wheat-layer-front .wheat-layer-inner {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 460 460'%3E%3Cdefs%3E%3Cg id='ear'%3E%3Cpath d='M0,300 C4,240 -8,180 2,120 C10,76 -2,40 4,0' stroke='%23f5b942' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3Cg fill='%23f5b942'%3E%3Cellipse cx='4' cy='0' rx='5' ry='11'/%3E%3Cellipse cx='-6' cy='18' rx='5' ry='11' transform='rotate(24 -6 18)'/%3E%3Cellipse cx='14' cy='18' rx='5' ry='11' transform='rotate(-24 14 18)'/%3E%3Cellipse cx='-4' cy='38' rx='5' ry='11' transform='rotate(18 -4 38)'/%3E%3Cellipse cx='12' cy='38' rx='5' ry='11' transform='rotate(-18 12 38)'/%3E%3Cellipse cx='-2' cy='58' rx='5' ry='11' transform='rotate(14 -2 58)'/%3E%3Cellipse cx='10' cy='58' rx='5' ry='11' transform='rotate(-14 10 58)'/%3E%3C/g%3E%3C/g%3E%3C/defs%3E%3Cuse href='%23ear' transform='translate(26,26) rotate(80)'/%3E%3Cuse href='%23ear' transform='translate(26,26) rotate(98) scale(0.9)'/%3E%3Cuse href='%23ear' transform='translate(26,26) rotate(116) scale(1.05)'/%3E%3Cuse href='%23ear' transform='translate(26,26) rotate(134) scale(0.85)'/%3E%3Cuse href='%23ear' transform='translate(26,26) rotate(152) scale(0.95)'/%3E%3Cuse href='%23ear' transform='translate(26,26) rotate(170) scale(0.75)'/%3E%3C/svg%3E");
+  opacity: 0.12;
+  animation: wheatSwaySlow 32s ease-in-out infinite reverse;
+}
+
+@keyframes wheatSwaySlow {
+  0%, 100% { transform: rotate(-0.6deg); }
+  50% { transform: rotate(0.6deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wheat-layer-inner {
+    animation: none !important;
+  }
 }
 
 * {
@@ -130,11 +181,13 @@ textarea {
   transition: right 0.25s ease;
 }
 
-.nav a:hover::after {
+.nav a:hover::after,
+.nav a.is-active::after {
   right: 0;
 }
 
 .nav a:hover,
+.nav a.is-active,
 .text-link:hover,
 .socials a:hover {
   color: var(--text);
@@ -240,7 +293,6 @@ textarea {
   font-size: 0.84rem;
 }
 
-/* --- Bowl-of-ramen hero visual --- */
 .hero-visual {
   position: relative;
   display: flex;
@@ -248,7 +300,6 @@ textarea {
   align-items: center;
 }
 
-/* Hanging noodle strands framing the bowl */
 .hero-visual::before,
 .hero-visual::after {
   content: "";
@@ -375,7 +426,6 @@ textarea {
   line-height: 1.7;
 }
 
-/* --- Steam --- */
 .steam {
   position: absolute;
   top: -60px;
@@ -420,7 +470,6 @@ textarea {
   .wisp { animation: none; opacity: 0; }
 }
 
-/* --- Noodle-strand section dividers --- */
 .noodle-divider {
   position: relative;
   width: 100%;
@@ -467,7 +516,6 @@ textarea {
   opacity: 0.9;
 }
 
-/* --- Sections --- */
 .content-section {
   padding: 72px 0 0;
 }
@@ -496,14 +544,18 @@ textarea {
 }
 
 .video-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
   gap: 22px;
 }
 
 .video-card {
   position: relative;
   overflow: hidden;
+  flex: 0 0 auto;
+  min-width: 160px;
+  max-width: 420px;
   min-height: 290px;
   border: 1px solid var(--line);
   border-radius: 18px;
@@ -535,9 +587,11 @@ textarea {
 
 .video-frame {
   position: relative;
-  height: 205px;
+  height: 220px;
+  width: 391px;
   overflow: hidden;
   background: var(--bg-deep);
+  flex: 0 0 auto;
 }
 
 .video-frame video {
@@ -609,16 +663,21 @@ textarea {
   line-height: 1.6;
 }
 
+.gallery-empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 30px 18px;
+  border: 1px dashed var(--line);
+  border-radius: 18px;
+  text-align: center;
+  color: var(--muted);
+}
+
 .portfolio-section {
   position: relative;
   padding-bottom: 8px;
 }
 
-.portfolio-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-/* Noodle strands draping down the sides of the portfolio section */
 .portfolio-section::before,
 .portfolio-section::after {
   content: "";
@@ -651,7 +710,108 @@ textarea {
   }
 }
 
-/* --- About --- */
+.hub-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.hub-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 30px 26px 26px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(38, 22, 10, 0.85), rgba(24, 14, 6, 0.75));
+  box-shadow: var(--shadow);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.hub-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--chili) 0 10px,
+    var(--egg) 10px 20px
+  );
+  opacity: 0.85;
+}
+
+.hub-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(245, 185, 66, 0.4);
+}
+
+.hub-card h3 {
+  margin: 0;
+  font-family: "Shippori Mincho", serif;
+  font-size: 1.6rem;
+}
+
+.hub-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.page-header {
+  padding: 44px 10px 12px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 18px;
+  font-size: 0.9rem;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-family: "Shippori Mincho", serif;
+  font-size: clamp(2.4rem, 4.5vw, 4rem);
+  letter-spacing: -0.02em;
+}
+
+.subnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 26px;
+  padding: 0;
+  list-style: none;
+}
+
+.subnav a {
+  display: inline-block;
+  padding: 0.55rem 1.05rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(245, 197, 105, 0.05);
+  color: var(--soft);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+}
+
+.subnav a:hover {
+  color: var(--text);
+  border-color: rgba(245, 185, 66, 0.4);
+  background: rgba(232, 73, 44, 0.3);
+}
+
+.category-section {
+  scroll-margin-top: 110px;
+}
+
 .about-card {
   display: grid;
   grid-template-columns: 1.3fr 0.7fr;
@@ -738,7 +898,6 @@ textarea {
   color: var(--muted);
 }
 
-/* --- Footer --- */
 .contact-section {
   margin-top: 32px;
   padding: 24px 0 18px;
@@ -761,7 +920,6 @@ textarea {
   gap: 14px;
 }
 
-/* --- Inquire modal --- */
 .inquire-modal {
   position: fixed;
   inset: 0;
@@ -851,7 +1009,6 @@ textarea {
   color: var(--soft);
 }
 
-/* --- Video state helpers --- */
 .video-frame video {
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -877,9 +1034,25 @@ textarea {
   display: none;
 }
 
-video:fullscreen,
-video:-webkit-full-screen,
-video:-moz-full-screen {
+body.fullscreen-lock {
+  overflow: hidden;
+}
+
+.video-frame.is-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  border-radius: 0;
+}
+
+.video-frame.is-fullscreen video {
+  position: static;
   width: auto;
   height: auto;
   max-width: 100%;
@@ -917,23 +1090,25 @@ video:-moz-full-screen {
   opacity: 1;
 }
 
-/* --- Reveal-on-scroll --- */
 .video-card,
 .section-heading,
-.split-heading {
+.split-heading,
+.hub-card {
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .video-card.pre-reveal,
 .section-heading.pre-reveal,
-.split-heading.pre-reveal {
+.split-heading.pre-reveal,
+.hub-card.pre-reveal {
   opacity: 0;
   transform: translateY(24px);
 }
 
 .video-card.is-revealed,
 .section-heading.is-revealed,
-.split-heading.is-revealed {
+.split-heading.is-revealed,
+.hub-card.is-revealed {
   opacity: 1;
   transform: none;
 }
@@ -941,16 +1116,79 @@ video:-moz-full-screen {
 @media (prefers-reduced-motion: reduce) {
   .video-card,
   .section-heading,
-  .split-heading {
+  .split-heading,
+  .hub-card {
     opacity: 1;
     transform: none;
     transition: none;
   }
 }
 
-/* ============================================================
-   Find the Coin — three-bowl shell game
-   ============================================================ */
+.carousel-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.carousel-track {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 22px;
+  padding-bottom: 6px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-track .video-card {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+.carousel-arrow {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(28, 17, 8, 0.85);
+  color: var(--soft);
+  cursor: pointer;
+  transition: border-color 0.25s ease, color 0.25s ease, transform 0.2s ease, background 0.25s ease;
+  z-index: 2;
+}
+
+.carousel-arrow:hover {
+  color: var(--text);
+  border-color: rgba(245, 185, 66, 0.45);
+  background: rgba(232, 73, 44, 0.55);
+  transform: scale(1.05);
+}
+
+.carousel-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+  transform: none;
+  background: rgba(28, 17, 8, 0.85);
+  border-color: var(--line);
+  color: var(--soft);
+}
+
+@media (max-width: 680px) {
+  .carousel-arrow {
+    width: 40px;
+    height: 40px;
+  }
+}
 
 .game-intro {
   margin: 10px 0 0;
@@ -1125,14 +1363,13 @@ video:-moz-full-screen {
   }
 }
 
-/* --- Responsive --- */
 @media (max-width: 980px) {
   .hero,
   .about-card {
     grid-template-columns: 1fr;
   }
 
-  .video-grid {
+  .hub-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1194,7 +1431,7 @@ video:-moz-full-screen {
     min-width: 0;
   }
 
-  .video-grid {
+  .hub-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1204,6 +1441,14 @@ video:-moz-full-screen {
     align-items: center;
     text-align: center;
     margin-bottom: 14px;
+  }
+
+  .page-header {
+    text-align: center;
+  }
+
+  .page-header .subnav {
+    justify-content: center;
   }
 
   .page-shell {
@@ -1239,13 +1484,14 @@ video:-moz-full-screen {
     max-width: 260px;
   }
 
-  .video-frame {
-    height: 190px;
-  }
-
   .play-button {
     width: 52px;
     height: 52px;
+  }
+
+  .video-frame {
+    height: 170px;
+    width: 302px;
   }
 
   .inquire-dialog {
