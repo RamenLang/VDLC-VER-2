@@ -543,6 +543,31 @@ textarea {
   font-weight: 700;
 }
 
+.recent-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 22px;
+}
+
+.recent-grid .video-card {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: none;
+}
+
+.recent-grid .video-frame {
+  width: 100%;
+}
+
+@media (max-width: 780px) {
+  .recent-grid {
+    flex-wrap: wrap;
+  }
+
+  .recent-grid .video-card {
+    flex: 1 1 260px;
+  }
+}
 .video-grid {
   display: flex;
   flex-wrap: wrap;
